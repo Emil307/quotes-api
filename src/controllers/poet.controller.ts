@@ -16,7 +16,7 @@ class PoetController {
 
     async getOnePoet(req: Request, res: Response) {
         try {
-
+            res.send(`it's work`);
         } catch (e: unknown) {
             console.log(e);
         } 
