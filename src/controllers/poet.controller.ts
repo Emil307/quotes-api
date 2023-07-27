@@ -45,7 +45,9 @@ class PoetController {
 
     async deletePoet(req: Request, res: Response) {
         try {
-
+            const id = req.params.id;
+            const poet = await db.query(`DELETE FROM poet WHERE id = ${id}`);
+            res.json('ok');
         } catch (e: unknown) {
             console.log(e);
         }
