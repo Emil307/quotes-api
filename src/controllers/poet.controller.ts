@@ -19,7 +19,7 @@ class PoetController {
     async getOnePoet(req: Request, res: Response) {
         try {
             const id = req.params.id;
-            const poet = await db.query(`SELECT * FROM poet WHERE id = ${id}`);
+            const poet = await db.query(`SELECT * FROM poet WHERE id = $1`, [id]);
             res.json(poet.rows[0]);
         } catch (e: unknown) {
             console.log(e);
@@ -37,7 +37,10 @@ class PoetController {
 
     async updatePoet(req: Request, res: Response) {
         try {
-
+            const {name, profile_quote} = req.body;
+            const id = req.params.id;
+            const poet = await db.query(`UPDATE poet SET name = $1, profile_quote = $2 WHERE id = $3 RETURNING *`, [name, profile_quote, id]);
+            res.json(poet.rows[0]);
         } catch (e: unknown) {
             console.log(e);
         }
@@ -46,7 +49,7 @@ class PoetController {
     async deletePoet(req: Request, res: Response) {
         try {
             const id = req.params.id;
-            const poet = await db.query(`DELETE FROM poet WHERE id = ${id}`);
+            await db.query(`DELETE FROM poet WHERE id = ${id}`);
             res.json('ok');
         } catch (e: unknown) {
             console.log(e);
