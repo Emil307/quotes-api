@@ -8,7 +8,9 @@ interface CustomResponse extends Response {
 class PoetController {
     async createPoet(req: Request, res: Response) {
         try {
-
+            const {name, profile_quote} = req.body;
+            const newPoet = await db.query(`INSERT INTO poet (name, profile_quote) values ($1, $2) RETURNING *`, [name, profile_quote]);
+            res.json(newPoet.rows[0]);
         } catch (e: unknown) {
             console.log(e);
         }
