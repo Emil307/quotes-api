@@ -11,4 +11,4 @@ app.listen(PORT, () => {
     } catch (e: unknown) {
         console.log(e);
     }
-})
+});
