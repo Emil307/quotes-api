@@ -18,7 +18,7 @@ class PoetController {
 
     async getOnePoet(req: Request, res: Response) {
         try {
-            res.send(`it's work`);
+            
         } catch (e: unknown) {
             console.log(e);
         } 
@@ -26,15 +26,15 @@ class PoetController {
 
     async getPoets(req: Request, res: Response) {
         try {
-
+            const poetsList = await db.query(`SELECT * FROM poet`);
+            res.json(poetsList.rows);
         } catch (e: unknown) {
-
+            console.log(e);
         }
     }
 
     async updatePoet(req: Request, res: Response) {
         try {
-
 
         } catch (e: unknown) {
             console.log(e);
