@@ -4,7 +4,7 @@ const pool = new Pool({
     password: "root",
     host: "localhost",
     port: 5432,
-    database: "quotes_db"
+    database: "postgres"
 });
 
 module.exports = pool;
