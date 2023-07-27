@@ -18,7 +18,9 @@ class PoetController {
 
     async getOnePoet(req: Request, res: Response) {
         try {
-            
+            const id = req.params.id;
+            const poet = await db.query(`SELECT * FROM poet WHERE id = ${id}`);
+            res.json(poet.rows[0]);
         } catch (e: unknown) {
             console.log(e);
         } 
